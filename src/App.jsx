@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import Home from "./pages/home/Home";
 import Single from "./pages/single/Single";
@@ -16,7 +15,6 @@ const App = () => {
         <Route path="/like" element={<Like />} />
         <Route path="/boxs" element={<Boxs />} />
       </Routes>
-      <Footer />
     </div>
   );
 };

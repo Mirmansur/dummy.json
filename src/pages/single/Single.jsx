@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import LoadingSpinner from "../LoadingSpinner";
 
 const Single = () => {
   const { id } = useParams();
@@ -104,7 +105,7 @@ const Single = () => {
             </div>
           </div>
         ) : (
-          <p>Loading...</p>
+          <LoadingSpinner />
         )}
       </div>
     </div>

@@ -1,48 +1,77 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct } from "../../redux/slice/cartSlice";
+
 const Boxs = () => {
   const { products } = useSelector((state) => state.cards);
   const dispatch = useDispatch();
 
-  console.log(products);
   const handleDelete = (id) => {
     dispatch(deleteProduct({ id }));
   };
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-40">
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className="border rounded-md p-4 bg-white max-w-sm mx-auto"
-          >
-            <img
-              src={product.thumbnail}
-              alt={product.title}
-              className="w-full h-40 object-contain rounded-md mb-4 cursor-pointer"
-            />
-            <div className="flex justify-between items-center mb-3">
-              <h3 className="text-lg font-semibold line-clamp-1 text-slate-900">
-                {product.title}
-              </h3>
-              <span className="text-md font-bold text-slate-800">
-                ${product.price}
-              </span>
-            </div>
-            <p className="text-gray-600 mb-5 line-clamp-3">
-              {product.description}
-            </p>
-            <button className="w-full bg-slate-800 text-white p-2 rounded-md hover:bg-slate-900 transition duration-200">
-              Muddati tolovga olish
-            </button>
-            <button
-              onClick={() => handleDelete(product.id)}
-              className="w-full border border-gray-300 text-gray-800 p-2 rounded-md mt-2 hover:bg-gray-100 transition duration-200"
+    <div className="mt-40">
+      <div className="container mx-auto ">
+        <h1 className="text-2xl font-semibold mb-6">Savat</h1>
+        <div className="space-y-6">
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="flex justify-between border rounded-lg p-4 bg-white"
             >
-              Delete
-            </button>
-          </div>
-        ))}
+              <div className="flex space-x-4">
+                <img
+                  src={product.thumbnail}
+                  alt={product.title}
+                  className="w-20 h-20 object-contain rounded-md"
+                />
+                <div>
+                  <h3 className="text-lg font-semibold">{product.title}</h3>
+                  <p className="text-sm text-gray-500">
+                    Narx: {product.price} som
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Sotuvchi: {product.seller}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Yetkazib berish muddat: {product.deliveryTime}
+                  </p>
+                  <div className="mt-2">
+                    <span className="bg-gray-100 text-sm px-2 py-1 rounded-md">
+                      Muddati tolov: {product.installmentPrice} som ×{" "}
+                      {product.installmentMonths} oyga
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col items-end space-y-2">
+                <div className="flex items-center">
+                  <button className="bg-gray-200 px-2 py-1">-</button>
+                  <span className="mx-2">1</span>
+                  <button className="bg-gray-200 px-2 py-1">+</button>
+                </div>
+                <button
+                  onClick={() => handleDelete(product.id)}
+                  className="text-red-500 hover:text-red-600 flex items-center space-x-1"
+                >
+                  <span>Ochirish</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M6 4a1 1 0 00-1 1v1H3a1 1 0 100 2h1v9a2 2 0 002 2h8a2 2 0 002-2V8h1a1 1 0 100-2h-2V5a1 1 0 00-1-1H6zm7 3V5H7v2h6z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

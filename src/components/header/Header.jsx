@@ -1,10 +1,10 @@
 import { Modal } from "antd";
 import { useState } from "react";
-import { CiSearch } from "react-icons/ci";
-import { CiHeart } from "react-icons/ci";
+import { CiSearch, CiHeart } from "react-icons/ci";
 import { FaBoxOpen } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 const Header = () => {
   const liked = useSelector((state) => state.liked.value);
   const { products } = useSelector((state) => state.cards);
@@ -21,18 +21,21 @@ const Header = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   return (
     <div className="relative">
-      <div className="Header py-5 px-10 fixed top-0 left-0 shadow-lg z-10 w-full bg-white border-b">
+      <div className="Header py-5 px-5 sm:px-10 fixed top-0 left-0 shadow-lg z-10 w-full bg-white border-b">
         <div className="container mx-auto">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between">
             <div className="logo">
               <Link to="/">
-                <h1 className="text-4xl font-bold text-slate-900">RM</h1>
+                <h1 className="text-3xl sm:text-4xl font-bold text-slate-900">
+                  RM
+                </h1>
               </Link>
             </div>
 
-            <div className="search w-[500px]">
+            <div className="search w-full sm:w-[500px] mt-4 sm:mt-0">
               <form className="flex items-center border rounded-md overflow-hidden shadow-sm">
                 <input
                   type="text"
@@ -40,12 +43,12 @@ const Header = () => {
                   className="outline-none p-3 w-full text-gray-700"
                 />
                 <button className="bg-slate-900 text-white p-3">
-                  <CiSearch className="text-2xl" />
+                  <CiSearch className="text-xl sm:text-2xl" />
                 </button>
               </form>
             </div>
 
-            <div className="icons flex items-center gap-5">
+            <div className="icons flex items-center gap-4 sm:gap-5 mt-4 sm:mt-5">
               <Link to="/like">
                 <div className="relative">
                   <div className="absolute -top-2 left-4">
@@ -53,7 +56,7 @@ const Header = () => {
                       {son}
                     </span>
                   </div>
-                  <CiHeart className="text-3xl text-slate-700 cursor-pointer hover:text-red-500 transition duration-200 " />
+                  <CiHeart className="text-2xl sm:text-3xl text-slate-700 cursor-pointer hover:text-red-500 transition duration-200" />
                 </div>
               </Link>
               <Link to="/boxs">
@@ -63,13 +66,13 @@ const Header = () => {
                       {boxs}
                     </span>
                   </div>
-                  <FaBoxOpen className="text-3xl text-slate-700 cursor-pointer  duration-200 " />
+                  <FaBoxOpen className="text-2xl sm:text-3xl text-slate-700 cursor-pointer transition duration-200" />
                 </div>
               </Link>
               <button
                 type="button"
                 onClick={showModal}
-                className="bg-slate-700 text-white p-2 px-5 rounded-md hover:bg-slate-800 transition duration-200"
+                className="bg-slate-700 text-white p-2 px-4 sm:px-5 rounded-md hover:bg-slate-800 transition duration-200"
               >
                 Kirish
               </button>

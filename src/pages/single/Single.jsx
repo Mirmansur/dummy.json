@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LoadingSpinner from "../LoadingSpinner";
+import { addToCart } from "../../redux/slice/cartSlice";
+import { useDispatch } from "react-redux";
 
 const Single = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [selectedInstallment, setSelectedInstallment] = useState("24");
+  const dispatch = useDispatch();
 
+  const addToCarts = (product) => {
+    console.log(product);
+    dispatch(addToCart(product));
+  };
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
       .then((response) => response.json())
@@ -20,12 +27,6 @@ const Single = () => {
 
   const handleInstallmentClick = (months) => {
     setSelectedInstallment(months);
-  };
-
-  const handleAddToCart = () => {
-    console.log(
-      `Product added to cart with ${selectedInstallment} month(s) installment`
-    );
   };
 
   return (
@@ -97,7 +98,7 @@ const Single = () => {
                 </div>
                 <button
                   className="bg-slate-800 text-white py-3 px-6 w-full rounded-md font-semibold hover:bg-slate-900 transition"
-                  onClick={handleAddToCart}
+                  onClick={() => addToCarts(product)}
                 >
                   Savatga qoshish
                 </button>

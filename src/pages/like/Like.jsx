@@ -4,7 +4,6 @@ import { toggleHeart } from "../../redux/slice/likeSlice";
 
 const Like = () => {
   const liked = useSelector((state) => state.liked.value);
-
   return (
     <div className="mt-40">
       <div className="container mx-auto">

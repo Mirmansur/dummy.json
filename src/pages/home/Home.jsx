@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-// import { CiHeart } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../LoadingSpinner";
 import { toggleHeart } from "../../redux/slice/likeSlice";
 import { FcDislike, FcLike } from "react-icons/fc";
-
+import { addToCart } from "../../redux/slice/cartSlice";
 const Home = () => {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
@@ -21,6 +20,11 @@ const Home = () => {
 
   const isProductLiked = (productId) => {
     return likedProducts?.some((product) => product.id === productId);
+  };
+
+  const addToCarts = (product) => {
+    console.log(product);
+    dispatch(addToCart(product));
   };
 
   return (
@@ -62,7 +66,10 @@ const Home = () => {
                 <p className="text-gray-600 mb-5 line-clamp-3">
                   {product.description}
                 </p>
-                <button className="w-full bg-slate-900 text-white p-3 rounded-md hover:bg-slate-800 transition duration-200">
+                <button
+                  onClick={() => addToCarts(product)}
+                  className="w-full bg-slate-900 text-white p-3 rounded-md hover:bg-slate-800 transition duration-200"
+                >
                   Add to Cart
                 </button>
               </div>

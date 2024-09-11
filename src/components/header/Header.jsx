@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 const Header = () => {
   const liked = useSelector((state) => state.liked.value);
+  const { products } = useSelector((state) => state.cards);
+  let boxs = products.length;
   let son = liked.length;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,7 +57,14 @@ const Header = () => {
                 </div>
               </Link>
               <Link to="/boxs">
-                <FaBoxOpen className="text-3xl text-slate-700 cursor-pointer hover:text-blue-500 transition duration-200 " />
+                <div className="relative">
+                  <div className="absolute -top-2 left-4">
+                    <span className="bg-red-500 text-white rounded-full text-xs p-1 px-2 text-center shadow-md font-bold">
+                      {boxs}
+                    </span>
+                  </div>
+                  <FaBoxOpen className="text-3xl text-slate-700 cursor-pointer  duration-200 " />
+                </div>
               </Link>
               <button
                 type="button"

@@ -69,16 +69,16 @@ const Single = () => {
                   {product.description}
                 </p>
                 <div className="text-xl font-semibold text-red-600 mb-4">
-                  Narx: {product.price} so'm
+                  Narx: {product.price} som
                 </div>
                 <p className="text-slate-500 line-through text-lg mb-4">
-                  Eski narx: 2 822 352 so'm
+                  Eski narx: 2 822 352 som
                 </p>
               </div>
 
               <div>
                 <p className="text-xl font-semibold mb-4">
-                  Muddati to'lov: 174 927 so'm/oyiga
+                  Muddati tolov: 174 927 som/oyiga
                 </p>
                 <div className="flex gap-2 mb-6">
                   {["3", "6", "12", "18", "24"].map((months) => (
@@ -99,7 +99,7 @@ const Single = () => {
                   className="bg-slate-800 text-white py-3 px-6 w-full rounded-md font-semibold hover:bg-slate-900 transition"
                   onClick={handleAddToCart}
                 >
-                  Savatga qo'shish
+                  Savatga qoshish
                 </button>
               </div>
             </div>

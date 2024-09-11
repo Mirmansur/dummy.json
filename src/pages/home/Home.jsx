@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
-import { CiHeart } from "react-icons/ci";
+// import { CiHeart } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../LoadingSpinner";
+import { toggleHeart } from "../../redux/slice/likeSlice";
+import { FcDislike, FcLike } from "react-icons/fc";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const likedProducts = useSelector((state) => state.liked.value);
 
   useEffect(() => {
     fetch("https://dummyjson.com/products")
@@ -13,6 +18,10 @@ const Home = () => {
         setProducts(data.products);
       });
   }, []);
+
+  const isProductLiked = (productId) => {
+    return likedProducts?.some((product) => product.id === productId);
+  };
 
   return (
     <div className="Home mt-40">
@@ -24,8 +33,15 @@ const Home = () => {
                 key={product.id}
                 className="product bg-white shadow-md rounded-lg p-5 hover:shadow-lg transition duration-300 relative"
               >
-                <button className="absolute top-3 right-3 text-slate-500 hover:text-red-500 transition duration-200">
-                  <CiHeart className="text-3xl" />
+                <button
+                  onClick={() => dispatch(toggleHeart(product))}
+                  className="absolute top-3 right-3 text-slate-500 hover:text-red-500 transition duration-200"
+                >
+                  {isProductLiked(product.id) ? (
+                    <FcDislike size={24} />
+                  ) : (
+                    <FcLike size={24} />
+                  )}
                 </button>
 
                 <Link to={`/single/${product.id}`}>

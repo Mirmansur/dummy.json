@@ -3,9 +3,12 @@ import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { FaBoxOpen } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 const Header = () => {
+  const liked = useSelector((state) => state.liked.value);
+  let son = liked.length;
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -41,8 +44,19 @@ const Header = () => {
             </div>
 
             <div className="icons flex items-center gap-5">
-              <CiHeart className="text-3xl text-slate-700 cursor-pointer hover:text-red-500 transition duration-200" />
-              <FaBoxOpen className="text-3xl text-slate-700 cursor-pointer hover:text-blue-500 transition duration-200" />
+              <Link to="/like">
+                <div className="relative">
+                  <div className="absolute -top-2 left-4">
+                    <span className="bg-red-500 text-white rounded-full text-xs p-1 px-2 text-center shadow-md font-bold">
+                      {son}
+                    </span>
+                  </div>
+                  <CiHeart className="text-3xl text-slate-700 cursor-pointer hover:text-red-500 transition duration-200 " />
+                </div>
+              </Link>
+              <Link to="/boxs">
+                <FaBoxOpen className="text-3xl text-slate-700 cursor-pointer hover:text-blue-500 transition duration-200 " />
+              </Link>
               <button
                 type="button"
                 onClick={showModal}

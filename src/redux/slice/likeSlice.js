@@ -1,39 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { saveToLocalStorage } from "../../components/helpers/saveToLS";
 
 const initialState = {
-  likedProducts: localStorage.getItem("liked")
-    ? JSON.parse(localStorage.getItem("liked"))
-    : [],
+  value: JSON.parse(localStorage.getItem("wishlist")) || [],
 };
 
-const likeSlice = createSlice({
-  name: "like",
+const wishlistSlice = createSlice({
+  name: "heart",
   initialState,
   reducers: {
-    addToLiked: (state, action) => {
-      const existingProductIndex = state.likedProducts.findIndex(
-        (product) => product.id === action.payload.id
-      );
-
-      if (existingProductIndex === -1) {
-        state.likedProducts.push(action.payload);
+    toggleHeart: (state, action) => {
+      let index = state.value.findIndex((i) => i.id === action.payload.id);
+      if (index < 0) {
+        state.value = [...state.value, action.payload];
       } else {
-        state.likedProducts = state.likedProducts.filter(
-          (product) => product.id !== action.payload.id
-        );
+        state.value = state.value.filter((i) => i.id !== action.payload.id);
       }
-
-      saveToLocalStorage("liked", state.likedProducts);
-    },
-    removeFromLiked: (state, action) => {
-      state.likedProducts = state.likedProducts.filter(
-        (product) => product.id !== action.payload
-      );
-      saveToLocalStorage("liked", state.likedProducts);
+      localStorage.setItem("wishlist", JSON.stringify(state.value));
     },
   },
 });
 
-export const { reducer } = likeSlice;
-export const { addToLiked, removeFromLiked } = likeSlice.actions;
+export const { toggleHeart } = wishlistSlice.actions;
+export default wishlistSlice.reducer;
